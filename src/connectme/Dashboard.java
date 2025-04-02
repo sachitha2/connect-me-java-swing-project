@@ -4,11 +4,16 @@
  */
 package connectme;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author sachitha
  */
 public class Dashboard extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form Dashboard
@@ -28,21 +33,77 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jPanelContent = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setPreferredSize(new java.awt.Dimension(250, 0));
+
+        jButton2.setText("Add Employee");
+        jButton2.setPreferredSize(new java.awt.Dimension(200, 30));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+
+        jButton3.setText("Search Employee");
+        jButton3.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel1.add(jButton3);
+
+        jButton4.setText("View All Employees  ");
+        jButton4.setPreferredSize(new java.awt.Dimension(200, 30));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+
+        jButton5.setText("Add Department  ");
+        jButton5.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel1.add(jButton5);
+
+        jButton6.setText("Add Designation  ");
+        jButton6.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel1.add(jButton6);
+
+        jButton7.setText("Create Assistant Account  ");
+        jButton7.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel1.add(jButton7);
+
+        jButton8.setText("Logout");
+        jButton8.setPreferredSize(new java.awt.Dimension(200, 30));
+        jPanel1.add(jButton8);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
+
+        jPanelContent.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelContent.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPanelContent, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JPanel panelAddEmployee = new JPanel();
+        panelAddEmployee.add(new JLabel("Add Employee UI goes here"));
+        setContent(panelAddEmployee);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,7 +139,22 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
     }
+    private void setContent(JPanel panel) {
+    jPanelContent.removeAll();
+    jPanelContent.add(panel);
+    jPanelContent.revalidate();
+    jPanelContent.repaint();
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelContent;
     // End of variables declaration//GEN-END:variables
 }
