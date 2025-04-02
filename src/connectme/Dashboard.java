@@ -6,10 +6,18 @@ package connectme;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -116,7 +124,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        setContent(getViewAllEmployeesPanel());        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -214,6 +222,43 @@ public class Dashboard extends javax.swing.JFrame {
         return panel;
     }
 
+    private JPanel getViewAllEmployeesPanel() {
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+
+        JLabel heading = new JLabel("All Employees", JLabel.CENTER);
+        heading.setFont(new Font("Arial", Font.BOLD, 16));
+        panel.add(heading, BorderLayout.NORTH);
+
+        // Table columns
+        String[] columns = {"Employee ID", "Full Name", "Department", "Designation", "Date Joined"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Read from file and populate table
+        try {
+            File file = new File("employees.txt");
+            if (file.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] data = line.split(",");
+                    if (data.length == 5) {
+                        model.addRow(data);
+                    }
+                }
+                reader.close();
+            } else {
+                JOptionPane.showMessageDialog(this, "No employee records found.", "File Missing", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        panel.add(scrollPane, BorderLayout.CENTER);
+        return panel;
+    }
+
     private JPanel getAddEmployeePanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -237,6 +282,37 @@ public class Dashboard extends javax.swing.JFrame {
         JTextField txtDate = new JTextField("yyyy-mm-dd");
 
         JButton btnSave = new JButton("Save");
+
+        btnSave.addActionListener(e -> {
+            String name = txtName.getText().trim();
+            String dept = (String) cmbDept.getSelectedItem();
+            String desig = (String) cmbDesig.getSelectedItem();
+            String empId = txtEmpId.getText().trim();
+            String date = txtDate.getText().trim();
+
+            // Basic validation
+            if (name.isEmpty() || empId.isEmpty() || date.isEmpty()) {
+                JOptionPane.showMessageDialog(panel, "Please fill all required fields!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Format: EMPID,FullName,Department,Designation,Date
+            String record = empId + "," + name + "," + dept + "," + desig + "," + date;
+
+            try (FileWriter fw = new FileWriter("employees.txt", true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
+
+                out.println(record);
+                JOptionPane.showMessageDialog(panel, "Employee saved successfully!");
+
+                // Optionally clear fields
+                txtName.setText("");
+                txtEmpId.setText("");
+                txtDate.setText("");
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(panel, "Error saving employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         // Add components to panel
         gbc.gridx = 0;
