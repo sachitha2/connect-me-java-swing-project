@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -95,14 +96,29 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton5.setText("Add Department  ");
         jButton5.setPreferredSize(new java.awt.Dimension(200, 30));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5);
 
         jButton6.setText("Add Designation  ");
         jButton6.setPreferredSize(new java.awt.Dimension(200, 30));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton6);
 
         jButton7.setText("Create Assistant Account  ");
         jButton7.setPreferredSize(new java.awt.Dimension(200, 30));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton7);
 
         jButton8.setText("Logout");
@@ -130,6 +146,19 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         setContent(getSearchEmployeePanel());        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        setContent(getAddDepartmentPanel());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        setContent(getAddDesignationPanel());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        setContent(getCreateAssistantPanel());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,6 +378,153 @@ public class Dashboard extends javax.swing.JFrame {
         gbc.gridy = 5;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(btnSave, gbc);
+
+        return panel;
+    }
+
+    private JPanel getAddDepartmentPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblDeptName = new JLabel("Department Name:");
+        JTextField txtDeptName = new JTextField(20);
+        JButton btnSave = new JButton("Save");
+
+        // Layout
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblDeptName, gbc);
+
+        gbc.gridx = 1;
+        panel.add(txtDeptName, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(btnSave, gbc);
+
+        // Save logic
+        btnSave.addActionListener(e -> {
+            String deptName = txtDeptName.getText().trim();
+            if (deptName.isEmpty()) {
+                JOptionPane.showMessageDialog(panel, "Please enter a department name!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try (FileWriter fw = new FileWriter("departments.txt", true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
+
+                out.println(deptName);
+                JOptionPane.showMessageDialog(panel, "Department saved!");
+                txtDeptName.setText("");
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(panel, "Error saving department: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        return panel;
+    }
+
+    private JPanel getAddDesignationPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblDesigName = new JLabel("Designation Name:");
+        JTextField txtDesigName = new JTextField(20);
+        JButton btnSave = new JButton("Save");
+
+        // Layout
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblDesigName, gbc);
+
+        gbc.gridx = 1;
+        panel.add(txtDesigName, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(btnSave, gbc);
+
+        // Save logic
+        btnSave.addActionListener(e -> {
+            String desigName = txtDesigName.getText().trim();
+            if (desigName.isEmpty()) {
+                JOptionPane.showMessageDialog(panel, "Please enter a designation name!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try (FileWriter fw = new FileWriter("designations.txt", true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
+
+                out.println(desigName);
+                JOptionPane.showMessageDialog(panel, "Designation saved!");
+                txtDesigName.setText("");
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(panel, "Error saving designation: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        return panel;
+    }
+
+    private JPanel getCreateAssistantPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblUsername = new JLabel("Assistant Username:");
+        JTextField txtUsername = new JTextField(20);
+
+        JLabel lblPassword = new JLabel("Password:");
+        JPasswordField txtPassword = new JPasswordField(20);
+
+        JButton btnSave = new JButton("Create Account");
+
+        // Layout
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(lblUsername, gbc);
+        gbc.gridx = 1;
+        panel.add(txtUsername, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(lblPassword, gbc);
+        gbc.gridx = 1;
+        panel.add(txtPassword, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(btnSave, gbc);
+
+        // Save logic
+        btnSave.addActionListener(e -> {
+            String username = txtUsername.getText().trim();
+            String password = new String(txtPassword.getPassword()).trim();
+
+            if (username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(panel, "Please fill all fields!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try (FileWriter fw = new FileWriter("users.txt", true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
+
+                out.println(username + "," + password);
+                JOptionPane.showMessageDialog(panel, "Assistant account created!");
+                txtUsername.setText("");
+                txtPassword.setText("");
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(panel, "Error saving account: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         return panel;
     }
