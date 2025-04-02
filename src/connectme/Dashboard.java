@@ -4,8 +4,17 @@
  */
 package connectme;
 
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -88,7 +97,7 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
 
         jPanelContent.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelContent.setLayout(new java.awt.BorderLayout());
+        jPanelContent.setLayout(new javax.swing.OverlayLayout(jPanelContent));
         getContentPane().add(jPanelContent, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -96,9 +105,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JPanel panelAddEmployee = new JPanel();
-        panelAddEmployee.add(new JLabel("Add Employee UI goes here"));
-        setContent(panelAddEmployee);
+        setContent(getAddEmployeePanel());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -144,6 +151,52 @@ public class Dashboard extends javax.swing.JFrame {
     jPanelContent.add(panel);
     jPanelContent.revalidate();
     jPanelContent.repaint();
+}
+    
+    private JPanel getAddEmployeePanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+
+    // Components
+    JLabel lblName = new JLabel("Full Name:");
+    JTextField txtName = new JTextField(20);
+
+    JLabel lblDept = new JLabel("Department:");
+    JComboBox<String> cmbDept = new JComboBox<>(new String[]{"IT", "HR", "Finance"});
+
+    JLabel lblDesig = new JLabel("Designation:");
+    JComboBox<String> cmbDesig = new JComboBox<>(new String[]{"Manager", "Assistant", "Executive"});
+
+    JLabel lblEmpId = new JLabel("Employee ID:");
+    JTextField txtEmpId = new JTextField(20);
+
+    JLabel lblDate = new JLabel("Date Joined:");
+    JTextField txtDate = new JTextField("yyyy-mm-dd");
+
+    JButton btnSave = new JButton("Save");
+
+    // Add components to panel
+    gbc.gridx = 0; gbc.gridy = 0; panel.add(lblName, gbc);
+    gbc.gridx = 1; panel.add(txtName, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 1; panel.add(lblDept, gbc);
+    gbc.gridx = 1; panel.add(cmbDept, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 2; panel.add(lblDesig, gbc);
+    gbc.gridx = 1; panel.add(cmbDesig, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 3; panel.add(lblEmpId, gbc);
+    gbc.gridx = 1; panel.add(txtEmpId, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 4; panel.add(lblDate, gbc);
+    gbc.gridx = 1; panel.add(txtDate, gbc);
+
+    gbc.gridx = 1; gbc.gridy = 5; gbc.anchor = GridBagConstraints.CENTER;
+    panel.add(btnSave, gbc);
+
+    return panel;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
