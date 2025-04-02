@@ -1,5 +1,10 @@
 package connectme;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /*
@@ -138,9 +143,38 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SwingUtilities.invokeLater(()->{
-            new Dashboard().setVisible(true);
-    });
+       String username = jTextField2.getText().trim();
+    String password = new String(jPasswordField1.getPassword()).trim();
+
+    String role = "HR Assistant"; // default
+    if (username.equals("admin") && password.equals("1234")) {
+        role = "HR Manager";
+        JOptionPane.showMessageDialog(this, "Login successful as HR Manager!");
+        new Dashboard(role).setVisible(true);
+        this.dispose();
+        return;
+    }
+
+    // Check users.txt for assistant credentials
+    File file = new File("users.txt");
+    if (file.exists()) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] creds = line.split(",");
+                if (creds.length == 2 && creds[0].equals(username) && creds[1].equals(password)) {
+                    JOptionPane.showMessageDialog(this, "Login successful as HR Assistant!");
+                    new Dashboard(role).setVisible(true);
+                    this.dispose();
+                    return;
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading users file.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    JOptionPane.showMessageDialog(this, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -38,8 +38,21 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    public Dashboard() {
-        initComponents();
+    private String userRole;
+    public Dashboard(String role) {
+        this.userRole = role;
+    initComponents();
+    this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+    this.setLocationRelativeTo(null);
+//    showWelcomeMessage();
+
+    // Hide manager-only buttons if assistant
+    if (userRole.equals("HR Assistant")) {
+        jButton5.setVisible(false);
+        jButton6.setVisible(false);
+        jButton7.setVisible(false);
+    }
+//        initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); // Maximize window
         this.setLocationRelativeTo(null); // Optional: center if windowed
     }
