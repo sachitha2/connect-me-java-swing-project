@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,6 +19,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -245,14 +247,11 @@ public class Dashboard extends javax.swing.JFrame {
             String keyword = txtSearch.getText().trim();
             if (!keyword.isEmpty()) {
                 // Replace this with file-based or database search later
-                String[][] dummyData = {
-                    {"EMP001", "Sachitha", "HR", "Manager", "2024-01-01"},
-                    {"EMP002", "Kasun", "IT", "Assistant", "2024-02-10"}
-                };
+                String[][] employeeData = loadEmployeeDataFromFile();
 
                 // Example: Filter by keyword match (very basic)
                 DefaultTableModel model = new DefaultTableModel(columns, 0);
-                for (String[] row : dummyData) {
+                for (String[] row : employeeData) {
                     if (row[0].contains(keyword) || row[1].toLowerCase().contains(keyword.toLowerCase())) {
                         model.addRow(row);
                     }
@@ -394,6 +393,37 @@ public class Dashboard extends javax.swing.JFrame {
 
         return panel;
     }
+    
+    private String[][] loadEmployeeDataFromFile() {
+    String[][] employeeData = new String[0][5]; // Initialize empty 2D array
+    try {
+        File file = new File("employees.txt");
+        if (file.exists()) {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            var employeeList = new ArrayList<String[]>();  // Using var here
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    employeeList.add(data);
+                }
+            }
+            reader.close();
+            
+            // Convert List to 2D array
+            employeeData = new String[employeeList.size()][5];
+            for (int i = 0; i < employeeList.size(); i++) {
+                employeeData[i] = employeeList.get(i);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No employee records found.", "File Missing", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error reading employee file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    return employeeData;
+}
 
     private JPanel getAddDepartmentPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
