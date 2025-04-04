@@ -47,7 +47,6 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
-//    showWelcomeMessage();
 
         // Hide manager-only buttons if assistant
         if (userRole.equals("HR Assistant")) {
@@ -55,7 +54,6 @@ public class Dashboard extends javax.swing.JFrame {
             addDesignationBtn.setVisible(false);
             createAssistantAccBtn.setVisible(false);
         }
-//        initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); // Maximize window
         this.setLocationRelativeTo(null); // Optional: center if windowed
     }
@@ -220,19 +218,19 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new Dashboard("default rol").setVisible(true);
             }
         });
     }
 
-    private void setContent(JPanel panel) {
+    void setContent(JPanel panel) {
         jPanelContent.removeAll();
         jPanelContent.add(panel);
         jPanelContent.revalidate();
         jPanelContent.repaint();
     }
 
-    private JPanel getSearchEmployeePanel() {
+    JPanel getSearchEmployeePanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
 
         // Top panel with label + search field + button
@@ -278,7 +276,7 @@ public class Dashboard extends javax.swing.JFrame {
         return panel;
     }
 
-    private JPanel getViewAllEmployeesPanel() {
+    JPanel getViewAllEmployeesPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
 
         JLabel heading = new JLabel("All Employees", JLabel.CENTER);
@@ -315,7 +313,7 @@ public class Dashboard extends javax.swing.JFrame {
         return panel;
     }
 
-    private JPanel getAddEmployeePanel() {
+    JPanel getAddEmployeePanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Padding around components
@@ -471,7 +469,7 @@ public class Dashboard extends javax.swing.JFrame {
         return employeeData;
     }
 
-    private JPanel getAddDepartmentPanel() {
+    JPanel getAddDepartmentPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -516,7 +514,7 @@ public class Dashboard extends javax.swing.JFrame {
         return panel;
     }
 
-    private JPanel getAddDesignationPanel() {
+    JPanel getAddDesignationPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -561,7 +559,7 @@ public class Dashboard extends javax.swing.JFrame {
         return panel;
     }
 
-    private JPanel getCreateAssistantPanel() {
+    JPanel getCreateAssistantPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
