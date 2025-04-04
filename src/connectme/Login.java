@@ -11,7 +11,6 @@ import javax.swing.SwingUtilities;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author sachitha
@@ -143,38 +142,39 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-       String username = usernameField.getText().trim();
-    String password = new String(passwordField.getPassword()).trim();
+        String username = usernameField.getText().trim();
+        String password = new String(passwordField.getPassword()).trim();
 
-    String role = "HR Assistant"; // default
-    if (username.equals("admin") && password.equals("1234")) {
-        role = "HR Manager";
-        JOptionPane.showMessageDialog(this, "Login successful as HR Manager!");
-        new Dashboard(role).setVisible(true);
-        this.dispose();
-        return;
-    }
+        User user = null;
 
-    // Check users.txt for assistant credentials
-    File file = new File("users.txt");
-    if (file.exists()) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] creds = line.split(",");
-                if (creds.length == 2 && creds[0].equals(username) && creds[1].equals(password)) {
-                    JOptionPane.showMessageDialog(this, "Login successful as HR Assistant!");
-                    new Dashboard(role).setVisible(true);
-                    this.dispose();
-                    return;
+        // Default role check
+        if (username.equals("admin") && password.equals("1234")) {
+            user = new HRManager(username, password);  // HR Manager login
+        } else {
+            // Check assistant credentials from file
+            File file = new File("users.txt");
+            if (file.exists()) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        String[] creds = line.split(",");
+                        if (creds.length == 2 && creds[0].equals(username) && creds[1].equals(password)) {
+                            user = new HRAssistant(username, password);  // HR Assistant login
+                            break;
+                        }
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "Error reading users file.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading users file.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
 
-    JOptionPane.showMessageDialog(this, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        if (user != null) {
+            user.login();  // Call the login method based on the user type
+            this.dispose();  // Close the login window
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
