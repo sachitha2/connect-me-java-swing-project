@@ -41,19 +41,20 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     private String userRole;
+
     public Dashboard(String role) {
         this.userRole = role;
-    initComponents();
-    this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-    this.setLocationRelativeTo(null);
+        initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
 //    showWelcomeMessage();
 
-    // Hide manager-only buttons if assistant
-    if (userRole.equals("HR Assistant")) {
-        jButton5.setVisible(false);
-        jButton6.setVisible(false);
-        jButton7.setVisible(false);
-    }
+        // Hide manager-only buttons if assistant
+        if (userRole.equals("HR Assistant")) {
+            addDepartmentBtn.setVisible(false);
+            addDesignationBtn.setVisible(false);
+            createAssistantAccBtn.setVisible(false);
+        }
 //        initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH); // Maximize window
         this.setLocationRelativeTo(null); // Optional: center if windowed
@@ -69,76 +70,81 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        addEmployeeBtn = new javax.swing.JButton();
+        searchEmployeeBtn = new javax.swing.JButton();
+        viewAllEmployeesBtn = new javax.swing.JButton();
+        addDepartmentBtn = new javax.swing.JButton();
+        addDesignationBtn = new javax.swing.JButton();
+        createAssistantAccBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
         jPanelContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 0));
 
-        jButton2.setText("Add Employee");
-        jButton2.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addEmployeeBtn.setText("Add Employee");
+        addEmployeeBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        addEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addEmployeeBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
+        jPanel1.add(addEmployeeBtn);
 
-        jButton3.setText("Search Employee");
-        jButton3.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        searchEmployeeBtn.setText("Search Employee");
+        searchEmployeeBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        searchEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                searchEmployeeBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3);
+        jPanel1.add(searchEmployeeBtn);
 
-        jButton4.setText("View All Employees  ");
-        jButton4.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        viewAllEmployeesBtn.setText("View All Employees  ");
+        viewAllEmployeesBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        viewAllEmployeesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                viewAllEmployeesBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4);
+        jPanel1.add(viewAllEmployeesBtn);
 
-        jButton5.setText("Add Department  ");
-        jButton5.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        addDepartmentBtn.setText("Add Department  ");
+        addDepartmentBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        addDepartmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                addDepartmentBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5);
+        jPanel1.add(addDepartmentBtn);
 
-        jButton6.setText("Add Designation  ");
-        jButton6.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addDesignationBtn.setText("Add Designation  ");
+        addDesignationBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        addDesignationBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addDesignationBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
+        jPanel1.add(addDesignationBtn);
 
-        jButton7.setText("Create Assistant Account  ");
-        jButton7.setPreferredSize(new java.awt.Dimension(200, 30));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        createAssistantAccBtn.setText("Create Assistant Account  ");
+        createAssistantAccBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        createAssistantAccBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                createAssistantAccBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
+        jPanel1.add(createAssistantAccBtn);
 
-        jButton8.setText("Logout");
-        jButton8.setPreferredSize(new java.awt.Dimension(200, 30));
-        jPanel1.add(jButton8);
+        logoutBtn.setText("Logout");
+        logoutBtn.setPreferredSize(new java.awt.Dimension(200, 30));
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(logoutBtn);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
 
@@ -149,31 +155,40 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
         // TODO add your handling code here:
         setContent(getAddEmployeePanel());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addEmployeeBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void viewAllEmployeesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllEmployeesBtnActionPerformed
         setContent(getViewAllEmployeesPanel());        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_viewAllEmployeesBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void searchEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchEmployeeBtnActionPerformed
         setContent(getSearchEmployeePanel());        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_searchEmployeeBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void addDepartmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDepartmentBtnActionPerformed
         setContent(getAddDepartmentPanel());
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_addDepartmentBtnActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void addDesignationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDesignationBtnActionPerformed
         setContent(getAddDesignationPanel());        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_addDesignationBtnActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void createAssistantAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAssistantAccBtnActionPerformed
         setContent(getCreateAssistantPanel());        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_createAssistantAccBtnActionPerformed
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+
+        // Dispose the current Dashboard window
+        this.dispose();  // Close the Dashboard window
+
+        // Show the Login screen again
+        new Login().setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,10 +326,10 @@ public class Dashboard extends javax.swing.JFrame {
         JTextField txtName = new JTextField(20);
 
         JLabel lblDept = new JLabel("Department:");
-        JComboBox<String> cmbDept = new JComboBox<>(new String[]{"IT", "HR", "Finance"});
+        JComboBox<String> cmbDept = new JComboBox<>(loadDepartments());
 
         JLabel lblDesig = new JLabel("Designation:");
-        JComboBox<String> cmbDesig = new JComboBox<>(new String[]{"Manager", "Assistant", "Executive"});
+        JComboBox<String> cmbDesig = new JComboBox<>(loadDesignations());
 
         JLabel lblEmpId = new JLabel("Employee ID:");
         JTextField txtEmpId = new JTextField(20);
@@ -393,37 +408,68 @@ public class Dashboard extends javax.swing.JFrame {
 
         return panel;
     }
-    
-    private String[][] loadEmployeeDataFromFile() {
-    String[][] employeeData = new String[0][5]; // Initialize empty 2D array
-    try {
-        File file = new File("employees.txt");
-        if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+    private String[] loadDepartments() {
+        var departments = new ArrayList<String>();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("departments.txt"));
             String line;
-            var employeeList = new ArrayList<String[]>();  // Using var here
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 5) {
-                    employeeList.add(data);
-                }
+                departments.add(line);
             }
             reader.close();
-            
-            // Convert List to 2D array
-            employeeData = new String[employeeList.size()][5];
-            for (int i = 0; i < employeeList.size(); i++) {
-                employeeData[i] = employeeList.get(i);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "No employee records found.", "File Missing", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading departments file.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(this, "Error reading employee file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return departments.toArray(new String[0]);  // Convert List to array
     }
 
-    return employeeData;
-}
+    private String[] loadDesignations() {
+        var designations = new ArrayList<String>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("designations.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                designations.add(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading designations file.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return designations.toArray(new String[0]);  // Convert List to array
+    }
+
+    private String[][] loadEmployeeDataFromFile() {
+        String[][] employeeData = new String[0][5]; // Initialize empty 2D array
+        try {
+            File file = new File("employees.txt");
+            if (file.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                var employeeList = new ArrayList<String[]>();  // Using var here
+                while ((line = reader.readLine()) != null) {
+                    String[] data = line.split(",");
+                    if (data.length == 5) {
+                        employeeList.add(data);
+                    }
+                }
+                reader.close();
+
+                // Convert List to 2D array
+                employeeData = new String[employeeList.size()][5];
+                for (int i = 0; i < employeeList.size(); i++) {
+                    employeeData[i] = employeeList.get(i);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No employee records found.", "File Missing", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading employee file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return employeeData;
+    }
 
     private JPanel getAddDepartmentPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
@@ -573,14 +619,14 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton addDepartmentBtn;
+    private javax.swing.JButton addDesignationBtn;
+    private javax.swing.JButton addEmployeeBtn;
+    private javax.swing.JButton createAssistantAccBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelContent;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton searchEmployeeBtn;
+    private javax.swing.JButton viewAllEmployeesBtn;
     // End of variables declaration//GEN-END:variables
 }

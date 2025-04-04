@@ -39,12 +39,12 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        usernameField = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        passwordField = new javax.swing.JPasswordField();
         jPanel7 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,12 +85,12 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setPreferredSize(new java.awt.Dimension(50, 10));
         jPanel6.add(jLabel3, java.awt.BorderLayout.CENTER);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                usernameFieldActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextField2, java.awt.BorderLayout.PAGE_END);
+        jPanel6.add(usernameField, java.awt.BorderLayout.PAGE_END);
 
         jPanel1.add(jPanel6);
 
@@ -100,20 +100,20 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Password");
         jLabel2.setPreferredSize(new java.awt.Dimension(50, 10));
         jPanel4.add(jLabel2, java.awt.BorderLayout.CENTER);
-        jPanel4.add(jPasswordField1, java.awt.BorderLayout.PAGE_END);
+        jPanel4.add(passwordField, java.awt.BorderLayout.PAGE_END);
 
         jPanel1.add(jPanel4);
 
         jPanel7.setPreferredSize(new java.awt.Dimension(300, 50));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setText("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton1, java.awt.BorderLayout.CENTER);
+        jPanel7.add(loginBtn, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel7);
 
@@ -138,13 +138,13 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_usernameFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String username = jTextField2.getText().trim();
-    String password = new String(jPasswordField1.getPassword()).trim();
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+       String username = usernameField.getText().trim();
+    String password = new String(passwordField.getPassword()).trim();
 
     String role = "HR Assistant"; // default
     if (username.equals("admin") && password.equals("1234")) {
@@ -175,7 +175,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     JOptionPane.showMessageDialog(this, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +213,6 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -223,7 +222,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
